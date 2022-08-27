@@ -1,9 +1,10 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-// import DefaultChar from './DefaultChar';
+import DefaultChar from './DefaultChar';
 import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
@@ -65,7 +66,7 @@ class CharInfo extends Component {
     render() {
         const {char, loading, error} = this.state;
 
-        const skeleton = char || loading || error ? null : <Skeleton/>;
+        const skeleton = char || loading || error ? null : <DefaultChar/>;
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spinner/> : null;
         const content = !(loading || error || !char) ? <View char={char}/> : null;
@@ -126,5 +127,10 @@ const View = ({char}) => {
         </>
     )
 }
+
+CharInfo.propTypes = {
+    charId: PropTypes.number
+}
+
 
 export default CharInfo;
